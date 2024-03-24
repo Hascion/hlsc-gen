@@ -1,7 +1,6 @@
 import { ethers } from "hardhat";
 async function main() {
-  const Halscion = await ethers.deployContract("Halscion", [1000]);
-
+  const Halscion = await ethers.deployContract("Halscion", [1000000000000000000000n]);
   await Halscion.waitForDeployment();
   console.log(`Halscion Token Contract deployed to ${Halscion.target}`);
 }

@@ -55,4 +55,11 @@ describe("Halscion", () => {
         console.log(balance);
     });
 
+    it("should be able to get current stake", async() => {
+        const { cHalscion, owner } = await loadFixture(startContract);
+        expect(await cHalscion.balanceOf(owner.address)).to.be.eq("100");
+        await cHalscion.stake(60);
+        expect(await cHalscion.getStake(owner.address)).to.be.eq("60");
+    });
+
 })

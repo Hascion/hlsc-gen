@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 contract Halscion is ERC20("Halscion", "HLSC"){
     mapping(address => uint256) _stakeTimestamp;
     mapping(address => uint256) _totalStake;
-    uint256 _rewardRate = 1;
+    uint256 _rewardRate = 100;
     
     constructor (uint256 amount) {
         _mint(msg.sender, amount);
@@ -43,6 +43,13 @@ contract Halscion is ERC20("Halscion", "HLSC"){
         // Return stake to owner and reset stake amount
         _transfer(address(this), msg.sender, _totalStake[msg.sender]);
         _totalStake[msg.sender] = 0;
+        _stakeTimestamp[msg.sender] = 0;
+    }
+
+    function getStake(address staker) public view returns (uint256) {
+        // Returns the current amount of stake
+        // require(_totalStake[staker] > 0, "No stakes for this sender");
+        return _totalStake[staker];
     }
 
 }
